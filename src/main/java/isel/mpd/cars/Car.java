@@ -1,3 +1,5 @@
+package isel.mpd.cars;
+
 /**
  * Created by lfalcao on 04/03/2015.
  */

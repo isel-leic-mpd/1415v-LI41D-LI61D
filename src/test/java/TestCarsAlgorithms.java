@@ -1,3 +1,5 @@
+import isel.mpd.cars.Car;
+import isel.mpd.cars.CarsAlgorithms;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
