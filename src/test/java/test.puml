@@ -1,0 +1,9 @@
+
+@startuml
+start
+:Proposal submission;
+:This is on defined on
+several **lines**;
+stop
+@enduml
+       

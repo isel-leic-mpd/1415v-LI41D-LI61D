@@ -3,16 +3,16 @@ package isel.mpd.weather;
 /**
  * Instances of this class represent weather information for one day.
  */
-public final class Day {
+public final class WeatherDay {
 
-    private final String
+    private String
             date,
             day,
             sunrise,
             sunset,
             moonrise,
             moonset;
-    private final int
+    private int
             maxtempC,
             maxtempF,
             mintempC,
@@ -22,7 +22,10 @@ public final class Day {
             year
     ;
 
-    public Day(String date, String day, String sunrise, String sunset, String moonrise, String moonset, int maxtempC, int maxtempF, int mintempC, int mintempF, int dayofweek, int month, int year) {
+    public WeatherDay() {
+
+    }
+    public WeatherDay(String date, String day, String sunrise, String sunset, String moonrise, String moonset, int maxtempC, int maxtempF, int mintempC, int mintempF, int dayofweek, int month, int year) {
         this.date = date;
         this.day = day;
         this.sunrise = sunrise;
@@ -43,7 +46,7 @@ public final class Day {
     {
         return "Date: " + date + '\n' + "Max Temperature = " + maxtempC + "(ºC) | " + maxtempF + "(ºF)\n"
                 + "Min Temperature = " + mintempC + "(ºC) | " + mintempF + "(ºF)\n"
-                + "Day/Night Cycle : " + sunrise + " (Sunrise) -> " + sunset + " (Sunset) -> " + moonrise
+                + "WeatherDay/Night Cycle : " + sunrise + " (Sunrise) -> " + sunset + " (Sunset) -> " + moonrise
                 + " (Moonrise) -> " + moonset + " Moonset)";
 
     }
