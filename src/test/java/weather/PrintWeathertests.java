@@ -1,5 +1,6 @@
 package weather;
 
+import isel.mpd.weather.printers.NonCloseableSystemOutOutputStream;
 import isel.mpd.weather.printers.Printer;
 import org.junit.Test;
 

@@ -1,26 +1,29 @@
-package weather.data;
+package isel.mpd.weather.data;
 
 import com.google.common.io.ByteStreams;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.function.Supplier;
 
 /**
- * Created by lfalcao on 25/03/2015.
+ * Supplies a Stream from am HTTP Url.
+ *
+ * The stream is the result of making the request to the specified Url and contains the response.
  */
-public class UrlStreamSupplier implements Supplier<InputStream> {
+public class HttpUrlStreamSupplier implements Supplier<InputStream> {
     private final String url;
 
-    public UrlStreamSupplier(String url) {
-
+    public HttpUrlStreamSupplier(String url) {
         this.url = url;
     }
 
     public InputStream get() {
         HttpURLConnection urlConnection = null;
+
         InputStream connInputStream = null;
         try {
             URL uri = new URL(url);
@@ -31,12 +34,12 @@ public class UrlStreamSupplier implements Supplier<InputStream> {
                 return null;
             }
             int size = urlConnection.getContentLength();
-            System.out.printf("%d bytes available", size);
-            byte[] data = new byte[size];
+            System.out.printf("%d bytes available\n", size);
 
             connInputStream = urlConnection.getInputStream();
             // int read = connInputStream.read(data);
-            ByteStreams.readFully(connInputStream, data);
+            byte[] data = ByteStreams.toByteArray(connInputStream);
+            System.out.printf("Read %d bytes\n", data.length);
             return new ByteArrayInputStream(data);
             
             

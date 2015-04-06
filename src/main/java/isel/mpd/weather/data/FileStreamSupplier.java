@@ -1,4 +1,4 @@
-package weather.data;
+package isel.mpd.weather.data;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

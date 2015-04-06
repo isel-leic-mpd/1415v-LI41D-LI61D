@@ -1,8 +1,7 @@
-package weather;
+package isel.mpd.weather.printers;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.PrintStream;
 
 /**
  * Created by lfalcao on 23/03/2015.

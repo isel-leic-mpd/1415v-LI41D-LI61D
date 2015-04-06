@@ -1,8 +1,8 @@
-package weather;
+package weather.data;
 
 import com.google.common.io.ByteStreams;
 import org.junit.Test;
-import weather.data.UrlStreamSupplier;
+import isel.mpd.weather.data.HttpUrlStreamSupplier;
 
 import java.io.*;
 import java.text.MessageFormat;
@@ -32,7 +32,7 @@ public class InputStreamSupplierTests {
         // Arrange
         String url = MessageFormat.format("http://api.worldweatheronline.com/free/v2/past-weather.ashx?q=Lisbon&format={0}&key=44a2b619601959766a08667fa3891&date=2015-03-20&enddate=2015-03-25", format);
 
-        UrlStreamSupplier urlSupplier = new UrlStreamSupplier(url);
+        HttpUrlStreamSupplier urlSupplier = new HttpUrlStreamSupplier(url);
 
         // Act
         InputStream is = urlSupplier.get();

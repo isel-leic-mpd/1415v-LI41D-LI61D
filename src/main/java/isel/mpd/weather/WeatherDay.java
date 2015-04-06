@@ -1,33 +1,29 @@
 package isel.mpd.weather;
 
+import java.util.Collection;
+
 /**
  * Instances of this class represent weather information for one day.
  */
 public final class WeatherDay {
-
     private String
             date,
-            day,
             sunrise,
             sunset,
             moonrise,
             moonset;
+
     private int
             maxtempC,
             maxtempF,
             mintempC,
-            mintempF,
-            dayofweek,
-            month,
-            year
+            mintempF
     ;
 
-    public WeatherDay() {
+    private Collection<HourlyInfo> hourlyInfo;
 
-    }
-    public WeatherDay(String date, String day, String sunrise, String sunset, String moonrise, String moonset, int maxtempC, int maxtempF, int mintempC, int mintempF, int dayofweek, int month, int year) {
+    public WeatherDay(String date, String sunrise, String sunset, String moonrise, String moonset, int maxtempC, int maxtempF, int mintempC, int mintempF, Collection<HourlyInfo> hourlyInfos) {
         this.date = date;
-        this.day = day;
         this.sunrise = sunrise;
         this.sunset = sunset;
         this.moonrise = moonrise;
@@ -36,9 +32,11 @@ public final class WeatherDay {
         this.maxtempF = maxtempF;
         this.mintempC = mintempC;
         this.mintempF = mintempF;
-        this.dayofweek = dayofweek;
-        this.month = month;
-        this.year = year;
+        this.hourlyInfo = hourlyInfos;
+    }
+
+    public WeatherDay() {
+
     }
 
     @Override
@@ -50,61 +48,45 @@ public final class WeatherDay {
                 + " (Moonrise) -> " + moonset + " Moonset)";
 
     }
-    public static class Builder{
 
-        private final String date;
-
-        private String
-                sunrise,
-                sunset,
-                moonrise,
-                moonset;
-
-        private int
-                maxtempC,
-                maxtempF,
-                mintempC,
-                mintempF;
-
-        public Builder(String date)
-        {
-            this.date = date;
-        }
-
-        public String getDate() {
-            return date;
-        }
-
-        public String getSunrise() {
-            return sunrise;
-        }
-
-        public String getSunset() {
-            return sunset;
-        }
-
-        public String getMoonrise() {
-            return moonrise;
-        }
-
-        public String getMoonset() {
-            return moonset;
-        }
-
-        public int getMaxtempC() {
-            return maxtempC;
-        }
-
-        public int getMaxtempF() {
-            return maxtempF;
-        }
-
-        public int getMintempC() {
-            return mintempC;
-        }
-
-        public int getMintempF() {
-            return mintempF;
-        }
+    public String getDate() {
+        return date;
     }
+
+    public String getSunrise() {
+        return sunrise;
+    }
+
+    public String getSunset() {
+        return sunset;
+    }
+
+    public String getMoonrise() {
+        return moonrise;
+    }
+
+    public String getMoonset() {
+        return moonset;
+    }
+
+    public int getMaxtempC() {
+        return maxtempC;
+    }
+
+    public int getMaxtempF() {
+        return maxtempF;
+    }
+
+    public int getMintempC() {
+        return mintempC;
+    }
+
+    public int getMintempF() {
+        return mintempF;
+    }
+
+    public Collection<HourlyInfo> getHourlyInfo() {
+        return hourlyInfo;
+    }
+
 }
