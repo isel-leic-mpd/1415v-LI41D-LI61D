@@ -14,21 +14,40 @@ import static java.util.stream.Collectors.toList;
 
 /**
  */
-public class WeatherDayRepositoryCsv implements WeatherDayRepository {
+public class WeatherDayRepositoryCsvWithStrategies implements WeatherDayRepository {
+    class WebSupplierStrategy implements Supplier<List<WeatherDay>> {
+
+        @Override
+        public List<WeatherDay> get() {
+            final List<WeatherDay> weatherDays = getWeatherDaysFromWebService();
+            weatherDaysSupplier = new LocalSupplierStrategy(weatherDays);
+            return weatherDays;
+        }
+    }
+
+    class LocalSupplierStrategy implements Supplier<List<WeatherDay>> {
+        List<WeatherDay> weatherDays;
+
+        public LocalSupplierStrategy(List<WeatherDay> weatherDays) {
+
+            this.weatherDays = weatherDays;
+        }
+
+        @Override
+        public List<WeatherDay> get() {
+            return weatherDays;
+        }
+    }
 
     Supplier<List<WeatherDay>> weatherDaysSupplier;
     private final Supplier<String> stringSupplier;
     private final Function<Collection<String>, WeatherDay> weatherInfoCreator;
 
-    public WeatherDayRepositoryCsv(Supplier<String> stringSupplier, Function<Collection<String>, WeatherDay> weatherDayCreator) {
+    public WeatherDayRepositoryCsvWithStrategies(Supplier<String> stringSupplier, Function<Collection<String>, WeatherDay> weatherDayCreator) {
         this.stringSupplier = stringSupplier;
         this.weatherInfoCreator = weatherDayCreator;
 
-        weatherDaysSupplier = () -> {
-            final List<WeatherDay> weatherDays = getWeatherDaysFromWebService();
-            weatherDaysSupplier = () -> weatherDays;
-            return weatherDays;
-        };
+        weatherDaysSupplier = new WebSupplierStrategy();
     }
 
 

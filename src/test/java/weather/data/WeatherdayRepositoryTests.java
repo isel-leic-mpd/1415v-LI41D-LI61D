@@ -19,7 +19,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * Tests for {@link isel.mpd.weather.data.WeatherDayRepository}
  */
-public class WeatherDayRepositoryTests {
+public class WeatherdayRepositoryTests {
 
     @Test
     public void shouldGetWeathersDayFromUrlSupplierAndCsvFormatWithSimpleStringSupplier() throws Exception {
@@ -51,7 +51,7 @@ public class WeatherDayRepositoryTests {
         WeatherDayRepositoryCsv wsr = new WeatherDayRepositoryCsv(strSupplier, new WeatherDayCsvCreator());
 
         // Act
-        final Collection<WeatherDay> weatherDays = wsr.getWeatherDays();
+        final Collection<WeatherDay> weatherDays = wsr.getWeatherDaysSupplier();
 
         // Assert
         assertNotNull(weatherDays);

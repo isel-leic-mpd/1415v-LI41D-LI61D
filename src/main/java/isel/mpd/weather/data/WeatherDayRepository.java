@@ -8,5 +8,5 @@ import java.util.Collection;
  * Interface for weather information repository.
  */
 public interface WeatherDayRepository {
-    Collection<WeatherDay> getWeatherDays();
+    Collection<WeatherDay> getWeatherDaysSupplier();
 }
