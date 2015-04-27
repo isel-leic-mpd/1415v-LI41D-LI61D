@@ -12,14 +12,12 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.Collection;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Tests for {@link isel.mpd.weather.data.WeatherDayRepository}
  */
-public class WeatherdayRepositoryTests {
+public class WDRepositoryTests {
 
     @Test
     public void shouldGetWeathersDayFromUrlSupplierAndCsvFormatWithSimpleStringSupplier() throws Exception {

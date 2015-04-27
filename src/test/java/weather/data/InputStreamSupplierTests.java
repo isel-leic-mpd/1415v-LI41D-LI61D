@@ -1,10 +1,11 @@
 package weather.data;
 
 import com.google.common.io.ByteStreams;
-import org.junit.Test;
 import isel.mpd.weather.data.HttpUrlStreamSupplier;
+import org.junit.Test;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
 import java.text.MessageFormat;
 
 import static org.junit.Assert.assertNotNull;

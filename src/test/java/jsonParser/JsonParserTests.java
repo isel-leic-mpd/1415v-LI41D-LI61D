@@ -93,8 +93,40 @@ public class JsonParserTests {
     }
 
     @Test
+     public void shouldDeserializeAnAlbumsContainerWithNoErrors() throws Exception {
+        String jsonStr =  "{\"errors\":[ ] }";
+
+        AlbumsContainer ac = jsonParser.toObject(jsonStr, AlbumsContainer.class);
+
+        assertEquals(0, ac.errors.size());
+    }
+
+    @Test
+    public void shouldDeserializeAnAlbumsContainerWithOneError() throws Exception {
+        String jsonStr =  "{\"errors\":[ \"Err1\" ] }";
+
+        AlbumsContainer ac = jsonParser.toObject(jsonStr, AlbumsContainer.class);
+
+        assertEquals(1, ac.errors.size());
+        assertEquals("Err1", ac.errors.get(0));
+    }
+
+    @Test
+    public void shouldDeserializeAnAlbumsContainerWithSeveralError() throws Exception {
+        String jsonStr =  "{\"errors\":[ \"Err1\", \"Err2\", \"Err3\" ] }";
+
+        AlbumsContainer ac = jsonParser.toObject(jsonStr, AlbumsContainer.class);
+
+        assertEquals(3, ac.errors.size());
+        assertEquals("Err1", ac.errors.get(0));
+        assertEquals("Err2", ac.errors.get(1));
+        assertEquals("Err3", ac.errors.get(2));
+    }
+
+
+    @Test
     public void shouldDeserializeAnAlbumsContainerWithNoAlbums() throws Exception {
-        String jsonStr =  "{\"title\":\"Free Music Archive - Albums\",\"message\":\"\",\"errors\":[]," +
+        String jsonStr =  "{\"title\":\"Free Music Archive - Albums\",\"message\":\"\",\"errors\":[ ]," +
                 "\"total\":\"11259\",\"total_pages\":2252,\"page\":1,\"limit\":\"5\"}";
 
         AlbumsContainer ac = jsonParser.toObject(jsonStr, AlbumsContainer.class);

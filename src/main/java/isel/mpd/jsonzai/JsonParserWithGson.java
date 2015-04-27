@@ -2,12 +2,6 @@ package isel.mpd.jsonzai;
 
 import com.google.gson.Gson;
 
-import java.lang.reflect.Field;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.function.Function;
-
 /**
  */
 public class JsonParserWithGson {

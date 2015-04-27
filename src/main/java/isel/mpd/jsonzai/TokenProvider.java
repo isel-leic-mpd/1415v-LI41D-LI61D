@@ -12,6 +12,18 @@ class TokenProvider {
     public TokenProvider() {
     }
 
+    private void skipSpaces() {
+        while(idx < jsonString.length() && Character.isSpaceChar(jsonString.charAt(idx))) {
+            ++idx;
+        }
+    }
+
+    public void setString(String jsonStr) {
+        idx = 0;
+        jsonString = jsonStr;
+    }
+
+
     public Token getNextToken(Class<?> t) throws Exception {
         skipSpaces();
         char c = jsonString.charAt(idx++);
@@ -99,7 +111,7 @@ class TokenProvider {
             if(c == '"') break;
             if(c == '\\') ++endIdx;
         }
-        final String str = getSubstringAndUpdateIdx(endIdx-1);
+        final String str = getSubstringAndUpdateIdx(endIdx - 1);
         ++idx;
         return str;
     }
@@ -133,16 +145,6 @@ class TokenProvider {
     }
 
 
-    private void skipSpaces() {
-        while(idx < jsonString.length() && Character.isSpaceChar(jsonString.charAt(idx))) {
-            ++idx;
-        }
-    }
-
-    public void setString(String jsonStr) {
-        idx = 0;
-        jsonString = jsonStr;
-    }
 
     static abstract class Token {
         public final String value;

@@ -1,7 +1,7 @@
-package isel.mpd.algorithms;
+package isel.mpd.misc;
 
+import isel.mpd.algorithms.SequenceAlgorithms;
 import isel.mpd.cars.Car;
-import isel.mpd.cars.CarsAlgorithms;
 import org.junit.BeforeClass;
 
 import java.util.Arrays;

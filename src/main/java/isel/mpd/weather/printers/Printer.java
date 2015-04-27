@@ -1,6 +1,7 @@
 package isel.mpd.weather.printers;
 
-import java.io.*;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.util.function.Supplier;
 
 /**
