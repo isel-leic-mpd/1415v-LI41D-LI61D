@@ -49,7 +49,7 @@ public class WDRepositoryTests {
         WeatherDayRepositoryCsv wsr = new WeatherDayRepositoryCsv(strSupplier, new WeatherDayCsvCreator());
 
         // Act
-        final Collection<WeatherDay> weatherDays = wsr.getWeatherDaysSupplier();
+        final Collection<WeatherDay> weatherDays = wsr.getWeatherDays();
 
         // Assert
         assertNotNull(weatherDays);

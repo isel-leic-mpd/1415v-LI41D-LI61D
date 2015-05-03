@@ -1,6 +1,7 @@
 package isel.mpd.algorithms;
 
 import isel.mpd.cars.Car;
+import isel.mpd.misc.BaseTestAlgorithms;
 import org.junit.Test;
 
 import java.util.Collection;

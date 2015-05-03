@@ -52,7 +52,7 @@ public class WeatherDayRepositoryCsvWithStrategies implements WeatherDayReposito
 
 
     @Override
-    public Collection<WeatherDay> getWeatherDaysSupplier() {
+    public List<WeatherDay> getWeatherDays() {
 //        List<WeatherDay> weatherDaysSupplier = null;
 //        final String[] splittedString = stringSupplier.get().split("(\r\n)|(\n)");
 //        Stream<String> stream = Arrays.stream(splittedString).filter(s -> !(s.startsWith("#") || s.indexOf(",") ==-1) );
