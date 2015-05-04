@@ -22,7 +22,7 @@ public class TestFilterAlgorithm extends BaseTestAlgorithms {
         // Arrange
 
         // Act
-        Iterable<Car> res = sequenceAlgorithms.filter(cars, new AboveYearPredicate(2012));
+        Iterable<Car> res = sequenceAlgorithms.filter(new AboveYearPredicate(2012));
 
         // Assert
         assertEquals(1, ((Collection<Car>)res).size());
@@ -46,7 +46,7 @@ public class TestFilterAlgorithm extends BaseTestAlgorithms {
         };
 
         // Act
-        Iterable<Car> res = sequenceAlgorithms.filter(cars, pred);
+        Iterable<Car> res = sequenceAlgorithms.filter(pred);
 
         // Assert
         assertEquals(1, ((Collection<Car>)res).size());
@@ -60,7 +60,7 @@ public class TestFilterAlgorithm extends BaseTestAlgorithms {
         // Arrange
 
         // Act
-        Iterable<Car> res = sequenceAlgorithms.filter(cars, new Predicate<Car>() {
+        Iterable<Car> res = sequenceAlgorithms.filter(new Predicate<Car>() {
             @Override
             public boolean test(Car car) {
                 return car.getYear() > 2012;
@@ -81,7 +81,7 @@ public class TestFilterAlgorithm extends BaseTestAlgorithms {
         Predicate<Car> pred = this::carAboveYear;
 
         // Act
-        Iterable<Car> res = sequenceAlgorithms.filter(cars, pred);
+        Iterable<Car> res = sequenceAlgorithms.filter(pred);
 
         // Assert
         assertEquals(1, ((Collection<Car>)res).size());
@@ -95,7 +95,7 @@ public class TestFilterAlgorithm extends BaseTestAlgorithms {
         // Arrange
 
         // Act
-        Iterable<Car> res = sequenceAlgorithms.filter(cars, (Car c) -> c.getYear() > 2012 );
+        Iterable<Car> res = sequenceAlgorithms.filter((Car c) -> c.getYear() > 2012 );
 
         // Assert
         assertEquals(1, ((Collection<Car>)res).size());

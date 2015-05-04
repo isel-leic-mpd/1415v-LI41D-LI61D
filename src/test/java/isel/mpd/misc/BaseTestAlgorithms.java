@@ -1,6 +1,6 @@
 package isel.mpd.misc;
 
-import isel.mpd.algorithms.SequenceAlgorithms;
+import isel.mpd.algorithms.MPDStream;
 import isel.mpd.cars.Car;
 import org.junit.BeforeClass;
 
@@ -12,12 +12,12 @@ import java.util.Collection;
  */
 public class BaseTestAlgorithms {
     protected static Collection<Car> cars;
-    protected static SequenceAlgorithms sequenceAlgorithms;
+    protected static MPDStream<Car> sequenceAlgorithms;
 
     @BeforeClass
     public static void setUp()  {
         cars = getCars();
-        sequenceAlgorithms = new SequenceAlgorithms();
+        sequenceAlgorithms = new MPDStream<Car>(cars);
     }
 
     private static Collection<Car> getCars() {
