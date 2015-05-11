@@ -98,7 +98,7 @@ public class TestFilterAlgorithm extends BaseTestAlgorithms {
         Iterable<Car> res = sequenceAlgorithms.filter((Car c) -> c.getYear() > 2012 );
 
         // Assert
-        assertEquals(1, ((Collection<Car>)res).size());
+        assertEquals(1, ((Collection<Car>) res).size());
     }
 
 

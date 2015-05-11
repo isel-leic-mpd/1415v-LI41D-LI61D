@@ -14,6 +14,7 @@ import isel.mpd.weather.data.stringsuppliers.StringSupplier;
 import java.text.ParseException;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -26,10 +27,13 @@ import static isel.mpd.misc.LazyInitializer.lazily;
 public class SortingAlgorithms {
 
     public static void print(List<WeatherDay> src) {
+
         System.out.println("#############################################");
-        for (WeatherDay l : src) {
-            System.out.println(l);
-        }
+        src.stream().forEach(System.out::println);
+
+//        for (WeatherDay l : src) {
+//            System.out.println(l);
+//        }
     }
 
     private static class MyComparator<T, R extends Comparable<R>> implements Comparator<T> {
@@ -120,7 +124,6 @@ public class SortingAlgorithms {
 //                .thenComparing(WeatherInfo::getPrecipMM));
 
         print(h);
-
     }
 }
 

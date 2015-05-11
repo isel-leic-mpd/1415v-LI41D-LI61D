@@ -1,33 +1,33 @@
 package isel.mpd.algorithms;
 
 import java.util.Iterator;
-import java.util.function.Function;
-import java.util.function.Predicate;
+import java.util.OptionalDouble;
+import java.util.function.*;
 
 /**
  * Created by lfalcao on 04/05/2015.
  */
 public class MPDLazyStream<T> implements Iterable<T> {
+    protected Iterable<?> seq;
 
-
-    public MPDLazyStream(Iterable<T> seq) {
-
+    public MPDLazyStream(Iterable<?> seq) {
+        this.seq = seq;
     }
 
     public MPDLazyStream<T> filter(Predicate<T> pred) {
-        // TODO
-        return null;
+        return new MPDFilterLazyStream<>(this, pred);
     }
 
-    public <R> MPDLazyStream<R> map(Function<T, R> transformer) {
-        // TODO
-        return null;
+    public <R> MPDLazyStream<R> map(Function<T, R> mapper) {
+        return new MPDMapLazyStream<>(this, mapper);
     }
 
+    public <T> MPDLazyStream<T> limit(int limit) {
+        return new MPDLimitStream(this, limit);
+    }
 
     @Override
     public Iterator<T> iterator() {
-        // TODO
-        return null;
+        return (Iterator<T>) seq.iterator();
     }
 }
