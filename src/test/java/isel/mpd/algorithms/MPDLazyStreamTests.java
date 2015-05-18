@@ -2,6 +2,7 @@ package isel.mpd.algorithms;
 
 import isel.mpd.cars.Car;
 import isel.mpd.misc.BaseTestAlgorithms;
+import isel.mpd.misc.TestUtils;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -33,7 +34,34 @@ public class MPDLazyStreamTests {
                 new Car("BMW", "X5", 2009, "Black"),
                 new Car("BMW", "320D", 2005, "White"),
                 new Car("Renault", "Clio", 2013, "Bordeaux"),
-                new Car("Fiat", "Punto", 1996, "White"));
+                new Car("Fiat", "Punto", 1996, "White"),
+                new Car("Audi", "A4", 2010, "Red"),
+                new Car("BMW", "X5", 2009, "Black"),
+                new Car("BMW", "320D", 2005, "White"),
+                new Car("Renault", "Clio", 2013, "Bordeaux"),
+                new Car("Fiat", "Punto", 1996, "White"),
+                new Car("Audi", "A4", 2010, "Red"),
+                new Car("BMW", "X5", 2009, "Black"),
+                new Car("BMW", "320D", 2005, "White"),
+                new Car("Renault", "Clio", 2013, "Bordeaux"),
+                new Car("Fiat", "Punto", 1996, "White"),
+                new Car("Audi", "A4", 2010, "Red"),
+                new Car("BMW", "X5", 2009, "Black"),
+                new Car("BMW", "320D", 2005, "White"),
+                new Car("Renault", "Clio", 2013, "Bordeaux"),
+                new Car("Fiat", "Punto", 1996, "White"),
+                new Car("Audi", "A4", 2010, "Red"),
+                new Car("BMW", "X5", 2009, "Black"),
+                new Car("BMW", "320D", 2005, "White"),
+                new Car("Renault", "Clio", 2013, "Bordeaux"),
+                new Car("Fiat", "Punto", 1996, "White"),
+                new Car("Audi", "A4", 2010, "Red"),
+                new Car("BMW", "X5", 2009, "Black"),
+                new Car("BMW", "320D", 2005, "White"),
+                new Car("Renault", "Clio", 2013, "Bordeaux"),
+                new Car("Fiat", "Punto", 1996, "White"),
+                new Car("Smart", "Punto", 2000, "White"));
+
     }
 
     @Test
@@ -64,11 +92,30 @@ public class MPDLazyStreamTests {
 
     }
 
+
+    @Test
+    public void shouldGetAverageOfStringLengths() throws Exception {
+        OptionalDouble average = lazyStream.average2(Car::getYear);
+
+        assertEquals(getCars().stream().mapToInt(Car::getYear).average().getAsDouble(), average.getAsDouble());
+    }
+
     private int count(MPDLazyStream<?> stream1) {
         int cnt = 0;
         for (Object car : stream1) {
             ++cnt;
         }
         return cnt;
+    }
+
+
+    @Test
+    public void shouldExecuteAverageSeveralTimesAndHaveTheSameResult() throws Exception {
+        Double averageExpected = 2006.5;
+        TestUtils.executeAndCheckResult(MPDLazyStreamTests::calcAverage, averageExpected);
+    }
+
+    private static Double calcAverage() {
+        return lazyStream.average4(Car::getYear, new Car("Dummy", "A4", 2010, "Red")).getAsDouble();
     }
 }
