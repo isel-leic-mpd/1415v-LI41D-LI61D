@@ -17,11 +17,14 @@ public class TestUtils {
     }
 
     public static <T>void executeAndCheckResult(Supplier<T> supplier, T val, int numRep) {
+        System.out.println("--------------------------------------------------------");
         for (int i = 0; i < numRep; i++) {
             T res = supplier.get();
             System.out.printf("Result in iteration %d was %s\n", i, res);
-            assertEquals("Value was not equal on iteration " + i, res, val);
+            assertEquals("Value was not equal on iteration " + i, val,  res);
         }
+
+
 
 
     }

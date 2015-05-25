@@ -47,5 +47,18 @@ public class MPDStream<T> implements Iterable<T> {
     public Iterator<T> iterator() {
         return seq.iterator();
     }
+
+
+    public <U> MPDStream<U> flatMap(Function<T, MPDStream<U>> mapper) {
+        ArrayList<U> results = new ArrayList<U>();
+
+        for (T t : this) {
+            for (U u : mapper.apply(t)) {
+                results.add(u);
+            }
+        }
+
+        return new MPDStream<>(results);
+    }
 }
 

@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Optional;
 import java.util.OptionalDouble;
 
 import static junit.framework.Assert.assertEquals;
@@ -60,7 +61,38 @@ public class MPDLazyStreamTests {
                 new Car("BMW", "320D", 2005, "White"),
                 new Car("Renault", "Clio", 2013, "Bordeaux"),
                 new Car("Fiat", "Punto", 1996, "White"),
+                new Car("Audi", "A4", 2010, "Red"),
+                new Car("BMW", "X5", 2009, "Black"),
+                new Car("BMW", "320D", 2005, "White"),
+                new Car("Renault", "Clio", 2013, "Bordeaux"),
+                new Car("Fiat", "Punto", 1996, "White"),
+                new Car("Audi", "A4", 2010, "Red"),
+                new Car("BMW", "X5", 2009, "Black"),
+                new Car("BMW", "320D", 2005, "White"),
+                new Car("Renault", "Clio", 2013, "Bordeaux"),
+                new Car("Fiat", "Punto", 1996, "White"),
+                new Car("Audi", "A4", 2010, "Red"),
+                new Car("BMW", "X5", 2009, "Black"),
+                new Car("BMW", "320D", 2005, "White"),
+                new Car("Renault", "Clio", 2013, "Bordeaux"),
+                new Car("Fiat", "Punto", 1996, "White"),
+                new Car("Audi", "A4", 2010, "Red"),
+                new Car("BMW", "X5", 2009, "Black"),
+                new Car("BMW", "320D", 2005, "White"),
+                new Car("Renault", "Clio", 2013, "Bordeaux"),
+                new Car("Fiat", "Punto", 1996, "White"),
+                new Car("Audi", "A4", 2010, "Red"),
+                new Car("BMW", "X5", 2009, "Black"),
+                new Car("BMW", "320D", 2005, "White"),
+                new Car("Renault", "Clio", 2013, "Bordeaux"),
+                new Car("Fiat", "Punto", 1996, "White"),
+                new Car("Audi", "A4", 2010, "Red"),
+                new Car("BMW", "X5", 2009, "Black"),
+                new Car("BMW", "320D", 2005, "White"),
+                new Car("Renault", "Clio", 2013, "Bordeaux"),
+                new Car("Fiat", "Punto", 1996, "White"),
                 new Car("Smart", "Punto", 2000, "White"));
+
 
     }
 
@@ -111,11 +143,22 @@ public class MPDLazyStreamTests {
 
     @Test
     public void shouldExecuteAverageSeveralTimesAndHaveTheSameResult() throws Exception {
-        Double averageExpected = 2006.5;
-        TestUtils.executeAndCheckResult(MPDLazyStreamTests::calcAverage, averageExpected);
+        Double averageExpected = 1000.0;
+        TestUtils.executeAndCheckResult(MPDLazyStreamTests::calcAverage, averageExpected, 1);
     }
 
+
+
     private static Double calcAverage() {
-        return lazyStream.average4(Car::getYear, new Car("Dummy", "A4", 2010, "Red")).getAsDouble();
+        //return lazyStream.average4(Car::getYear, new Car("Dummy", "A4", 2010, "Red")).getAsDouble();
+        return lazyStream.average4(Car::getWeight).getAsDouble();
+    }
+
+
+    private static Double calcAverageWithMap() {
+        OptionalDouble res = lazyStream.stream().mapToDouble(Car::getYear).boxed().mapToInt(Double::intValue).average();
+        return res.orElse(0.0);
+
+        //return res.isPresent() ? res.getAsDouble() : 0.0;
     }
 }

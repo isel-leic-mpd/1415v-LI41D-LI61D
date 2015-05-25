@@ -8,13 +8,18 @@ public class Car {
     private String model;
     private String color;
     private int year;
+    private int weight;
 
     public Car(String brand, String model, int year, String color) {
+        this(brand, model, color, year, 1000);
+    }
 
+    public Car(String brand, String model, String color, int year, int weight) {
         this.brand = brand;
         this.model = model;
-        this.year = year;
         this.color = color;
+        this.year = year;
+        this.weight = weight;
     }
 
     public int getYear() {
@@ -57,5 +62,9 @@ public class Car {
                 ", color='" + color + '\'' +
                 ", year=" + year +
                 '}';
+    }
+
+    public int getWeight() {
+        return weight;
     }
 }

@@ -2,6 +2,7 @@ package isel.mpd.algorithms;
 
 import com.google.common.collect.Lists;
 import isel.mpd.cars.Car;
+import isel.mpd.misc.LazyInitializer;
 
 import java.util.*;
 import java.util.function.*;
@@ -94,15 +95,15 @@ public class MPDLazyStream<T> implements Iterable<T> {
 
     }
 
-    public OptionalDouble average4(ToIntFunction<T> converter, T identity) {
+    public OptionalDouble average4(ToIntFunction<T> converter) {
         Averager<T> averager = new Averager<T>(converter);
-        stream().parallel().reduce(identity, averager);
+        stream().parallel().reduce(null, averager);
         return averager.average();
     }
 
     public Stream<T> stream() {
-        //return StreamSupport.stream(((Iterable<T>) seq).spliterator(), false);
-        return Lists.newArrayList((Iterable<T>) seq).stream();
+        return StreamSupport.stream(((Iterable<T>) seq).spliterator(), true);
+        //return Lists.newArrayList((Iterable<T>) seq).stream();
     }
 
     @Override
@@ -122,7 +123,11 @@ public class MPDLazyStream<T> implements Iterable<T> {
 
         @Override
         public T apply(T t, T t2) {
-            accept(t2);
+            System.out.printf("Apply called in thread %d. T is %s\n", Thread.currentThread().getId(), t);
+            if(t2 != null) {
+                cnt++;
+                sum += converter.applyAsInt(t2);
+            }
             return t2;
         }
 
