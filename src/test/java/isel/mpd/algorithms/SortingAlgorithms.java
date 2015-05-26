@@ -14,7 +14,6 @@ import isel.mpd.weather.data.stringsuppliers.StringSupplier;
 import java.text.ParseException;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -89,12 +88,12 @@ public class SortingAlgorithms {
 
         List<WeatherDay> h = repository.getWeatherDays();
 
-        h.sort((wd1, wd2) -> wd1.getMaxtempC() - wd2.getMaxtempC());
-        h.sort((wd1, wd2) -> wd1.getMintempC() - wd2.getMintempC());
+        h.sort((wd1, wd2) -> wd1.getMaxTempC() - wd2.getMaxTempC());
+        h.sort((wd1, wd2) -> wd1.getMinTempC() - wd2.getMinTempC());
 
-        h.sort((wd1, wd2) -> wd2.getMaxtempC() - wd1.getMaxtempC());
+        h.sort((wd1, wd2) -> wd2.getMaxTempC() - wd1.getMaxTempC());
 
-        final MyComparator<WeatherDay, Integer> comparing1 = comparing(WeatherDay::getMaxtempC);
+        final MyComparator<WeatherDay, Integer> comparing1 = comparing(WeatherDay::getMaxTempC);
         final MyComparator<WeatherDay, Integer> comparing2 = comparing1.revert();
         final MyComparator<WeatherDay, Integer> comparing3 = comparing2.revert();
         final MyComparator<WeatherDay, Integer> comparing4 = comparing1.revert();
@@ -106,7 +105,7 @@ public class SortingAlgorithms {
         h.sort(comparing5);
         print(h);
 //
-//        h.sort(comparing(WeatherDay::getMaxtempC).andThen(WeatherDay::getMintempC));
+//        h.sort(comparing(WeatherDay::getMaxTempC).andThen(WeatherDay::getMinTempC));
 
 
         //h.sort((w1, w2) -> ((Double)w1.precipMM).compareTo(w2.precipMM));

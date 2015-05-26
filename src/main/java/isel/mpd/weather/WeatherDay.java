@@ -69,15 +69,15 @@ public final class WeatherDay {
         return moonset;
     }
 
-    public int getMaxtempC() {
+    public int getMaxTempC() {
         return maxtempC;
     }
 
-    public int getMaxtempF() {
+    public int getMaxTempF() {
         return maxtempF;
     }
 
-    public int getMintempC() {
+    public int getMinTempC() {
         return mintempC;
     }
 

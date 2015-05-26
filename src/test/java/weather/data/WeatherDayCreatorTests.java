@@ -36,7 +36,7 @@ public class WeatherDayCreatorTests {
         // Assert
         assertNotNull(wd);
         assertEquals("2015-03-28", wd.getDate());
-        assertEquals(22, wd.getMaxtempC());
+        assertEquals(22, wd.getMaxTempC());
 
         assertNotNull(wd.getHourlyInfo());
 

@@ -8,7 +8,7 @@ import java.util.function.Supplier;
 /**
  * Created by lfalcao on 25/03/2015.
  */
-class FileStreamSupplier implements Supplier<InputStream> {
+public class FileStreamSupplier implements Supplier<InputStream> {
     private String path;
 
     public FileStreamSupplier(String path) {
