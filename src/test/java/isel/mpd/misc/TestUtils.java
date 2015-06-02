@@ -1,5 +1,6 @@
 package isel.mpd.misc;
 
+import java.util.concurrent.Callable;
 import java.util.function.Supplier;
 
 import static junit.framework.Assert.assertEquals;
@@ -23,9 +24,19 @@ public class TestUtils {
             System.out.printf("Result in iteration %d was %s\n", i, res);
             assertEquals("Value was not equal on iteration " + i, val,  res);
         }
+    }
 
 
+    public static <T>void executeAndMesurePerformance(Runnable supplier, int numRep, String message) {
+        System.out.println("--------------------------------------------------------------------------------------");
+        long fastest = Long.MAX_VALUE;
+        for (int i = 0; i < numRep; i++) {
+            long start = System.nanoTime();
+            supplier.run();
+            long elapsed = System.nanoTime() - start;
+            fastest = fastest < elapsed ? fastest : elapsed;
+        }
 
-
+        System.out.println(message + " - Fastest execution in " +  fastest / 1_000_000 + " ms");
     }
 }

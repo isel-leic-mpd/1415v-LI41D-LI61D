@@ -1,32 +1,36 @@
 package isel.mpd.algorithms;
 
+import isel.mpd.algorithms.primes.Primes;
 import org.junit.Test;
 
-import java.util.List;
-import java.util.Map;
-import java.util.stream.IntStream;
-
-import static java.util.stream.Collectors.partitioningBy;
-import static java.util.stream.Collectors.toList;
+import static isel.mpd.misc.TestUtils.executeAndMesurePerformance;
+import static java.util.stream.Collectors.joining;
 
 /**
  * Created by lfalcao on 27/05/2015.
  */
 public class PrimesTests {
     @Test
-    public void shoudGenerateTheFirstNPrimes() throws Exception {
-        List<Integer> primes = partitionPrimes(100);
+    public void shouldGenerateTheFirstNPrimes() throws Exception {
+        final int NUM_EXECUTIONS = 10;
+        final int PRIMES_TILL = 200_000;
+        int numPrimes = Primes.partitionPrimesSimpleOptimization(PRIMES_TILL).get(true).size();
+        System.out.println(numPrimes);
 
-        //Map<Boolean, List<Integer>> primesAndNonPrimes = IntStream.range(1, 100).collect(partitioningBy(this::isPrime));
+
+
+
+        executeAndMesurePerformance(() -> Primes.partitionPrimesSimpleOptimization(PRIMES_TILL), NUM_EXECUTIONS, "partitionPrimesSimpleOptimization");
+        executeAndMesurePerformance(() -> Primes.partitionPrimesWithAuxiliaryListOptimization(PRIMES_TILL), NUM_EXECUTIONS, "partitionPrimesWithAuxiliaryListOptimization");
+        executeAndMesurePerformance(() -> Primes.partitionPrimesWithAuxiliaryListAndFilterOptimization(PRIMES_TILL), NUM_EXECUTIONS, "partitionPrimesWithAuxiliaryListAndFilterOptimization");
+        executeAndMesurePerformance(() -> Primes.partitionPrimesWithAuxiliaryListAndTakeWhileOptimization(PRIMES_TILL), NUM_EXECUTIONS, "partitionPrimesWithAuxiliaryListAndTakeWhileOptimization");
+
+
+
+
     }
 
-    private List<Integer> partitionPrimes(int i) {
-        return IntStream.range(1, i).boxed().filter(this::isPrime).collect(toList());
-    }
 
 
-    boolean isPrime(int n) {
-        final int canditatePrime = (int)Math.sqrt(n);
-        return !IntStream.range(2,canditatePrime).anyMatch((i) ->  n % i == 0);
-    }
+
 }
