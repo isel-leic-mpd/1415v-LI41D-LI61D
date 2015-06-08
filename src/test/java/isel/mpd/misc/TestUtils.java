@@ -27,7 +27,7 @@ public class TestUtils {
     }
 
 
-    public static <T>void executeAndMesurePerformance(Runnable supplier, int numRep, String message) {
+    public static <T>void executeAndMeasurePerformance(Runnable supplier, int numRep, String message) {
         System.out.println("--------------------------------------------------------------------------------------");
         long fastest = Long.MAX_VALUE;
         for (int i = 0; i < numRep; i++) {

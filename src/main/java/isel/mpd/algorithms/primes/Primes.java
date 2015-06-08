@@ -55,22 +55,25 @@ public class Primes {
 
 
     public static Map<Boolean, List<Integer>> partitionPrimesSimpleOptimization(int n) {
-        return IntStream.rangeClosed(2, n).boxed().collect(Collectors.partitioningBy(Primes::isPrime));
+        return IntStream.rangeClosed(2, n).boxed()
+                .collect(Collectors.partitioningBy(Primes::isPrime));
     }
 
     public static Map<Boolean, List<Integer>> partitionPrimesWithAuxiliaryListOptimization(int n) {
-        return IntStream.rangeClosed(2, n).boxed().collect(new PrimesCollector(Primes::isPrimeWithList));
+        return IntStream.rangeClosed(2, n).boxed()
+                .collect(new PrimesCollector(Primes::isPrimeWithList));
     }
 
     public static Map<Boolean, List<Integer>> partitionPrimesWithAuxiliaryListAndFilterOptimization(int n) {
-        return IntStream.rangeClosed(2, n).boxed().collect(new PrimesCollector(Primes::isPrimeWithListAndFilter));
+        return IntStream.rangeClosed(2, n)
+                .boxed().collect(new PrimesCollector(Primes::isPrimeWithListAndFilter));
     }
 
     public static Map<Boolean, List<Integer>> partitionPrimesWithAuxiliaryListAndTakeWhileOptimization(int n) {
         return IntStream.rangeClosed(2, n).boxed().collect(new PrimesCollector(Primes::isPrimeWithTakeWhile));
     }
 
-    private static boolean isPrime(int n) {
+    private static boolean isPrime(Integer n) {
         final int candidatePrime = (int)Math.sqrt(n);
         return IntStream.rangeClosed(2, candidatePrime).noneMatch((i) -> n % i == 0);
     }
@@ -83,12 +86,14 @@ public class Primes {
 
     private static boolean isPrimeWithListAndFilter(List<Integer> primes, int n) {
         final int candidatePrime = (int)Math.sqrt(n);
-        return primes.stream().filter(i -> i <= candidatePrime).noneMatch((i) -> n % i == 0);
+        return primes.stream().filter(i -> i <= candidatePrime)
+                .noneMatch((i) -> n % i == 0);
     }
 
     private static boolean isPrimeWithTakeWhile(List<Integer> primes, int n) {
         final int candidatePrime = (int)Math.sqrt(n);
-        return takeWhile(primes, i -> i <= candidatePrime).stream().noneMatch((i) -> n % i == 0);
+        return takeWhile(primes, i -> i <= candidatePrime).stream()
+                .noneMatch((i) -> n % i == 0);
     }
 
     private static <A> List<A> takeWhile(List<A> list, Predicate<A> p) {
