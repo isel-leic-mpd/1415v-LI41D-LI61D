@@ -1,6 +1,5 @@
 package isel.mpd.misc;
 
-import java.util.concurrent.Callable;
 import java.util.function.Supplier;
 
 import static junit.framework.Assert.assertEquals;
@@ -27,16 +26,26 @@ public class TestUtils {
     }
 
 
-    public static <T>void executeAndMeasurePerformance(Runnable supplier, int numRep, String message) {
+//    public static <T>void executeAndMeasurePerformance(Runnable runnable, int numRep, String message) {
+//        executeAndMeasurePerformance((Supplier<Void>)(runnable::run), numRep, message);
+//    }
+
+
+    public static <T> void executeAndMeasurePerformance(Supplier<T> supplier, int numRep, String message) {
         System.out.println("--------------------------------------------------------------------------------------");
+        T ret = null;
         long fastest = Long.MAX_VALUE;
         for (int i = 0; i < numRep; i++) {
             long start = System.nanoTime();
-            supplier.run();
+            T currRet = supplier.get();
             long elapsed = System.nanoTime() - start;
-            fastest = fastest < elapsed ? fastest : elapsed;
+            if (fastest > elapsed) {
+                fastest = elapsed;
+                ret = currRet;
+            }
         }
 
+        System.out.println(ret);
         System.out.println(message + " - Fastest execution in " +  fastest / 1_000_000 + " ms");
     }
 }

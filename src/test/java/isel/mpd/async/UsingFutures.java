@@ -1,9 +1,9 @@
 package isel.mpd.async;
 
+import isel.mpd.Async.Shop;
 import isel.mpd.misc.TestUtils;
 import org.junit.Test;
 
-import java.lang.reflect.Executable;
 import java.util.concurrent.*;
 
 /**
@@ -55,18 +55,20 @@ public class UsingFutures {
 
     }
 
-    private void testShop1() {
+
+    private Double testShop1() {
         Shop shop = new Shop("BestShop");
         final CompletableFuture<Double> iPhone23S = shop.getPriceAsync("iPhone23S");
         doSomeAfterWork();
         try {
-            iPhone23S.get();
+            return iPhone23S.get();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
 
+        return null;
     }
 
     private void processResult(long result, long result2) {
