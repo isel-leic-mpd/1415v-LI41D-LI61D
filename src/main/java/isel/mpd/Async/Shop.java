@@ -47,24 +47,20 @@ public class Shop extends FakeService {
 
     }
 
-    private double calculatePriceStr(String product) {
-        delay();
-        return random.nextDouble();
-    }
-
-
     public String getName() {
         return name;
     }
 
     public String getPriceStr(String product) {
         double price = calculatePrice(product);
-        Discount.Code code =  Discount.Code.values()[(random.nextInt(Discount.Code.values().length))];
-        String ret =  String.format(Locale.getDefault(), "%s:%.2f:%s", name, price, code);
+        Discount.Code code = Discount.Code.values()[(random.nextInt(Discount.Code.values().length))];
+        String ret = String.format(Locale.getDefault(), "%s:%.2f:%s", name, price, code);
+        //System.out.println("getPrice " + System.currentTimeMillis());
         return ret;
     }
 
     private double calculatePrice(String product) {
-        delay();
-        return random.nextDouble() * product.charAt(0) + product.charAt(1); }
+        delay(name);
+        return random.nextDouble() * product.charAt(0) + product.charAt(1);
+    }
 }

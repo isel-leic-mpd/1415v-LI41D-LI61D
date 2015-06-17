@@ -14,12 +14,15 @@ public class Discount extends FakeService {
     }
 
     public static String applyDiscount(Quote quote) {
-        return quote.getShopName() + " price is " + Discount.apply(quote.getPrice(), quote.getDiscountCode());
+        return quote.getShopName() + " price is " + Discount.apply(quote);
 
     }
 
-    private static String apply(double price, Code discountCode) {
-        delay();
+    private static String apply(Quote quote) {
+        double price = quote.getPrice();
+        Code discountCode = quote.getDiscountCode();
+        delay("Discount for " + quote.getShopName());
+        //System.out.println("applyDiscount " + System.currentTimeMillis());
         return String.valueOf(price - price * discountCode.percentage / 100);
     }
 }

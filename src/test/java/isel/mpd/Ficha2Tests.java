@@ -4,12 +4,9 @@ import ficha2.Customer;
 import ficha2.Order;
 import ficha2.OrdersRepository;
 import ficha2.Product;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.util.Comparator;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -97,6 +94,13 @@ public class Ficha2Tests {
 
         final Stream<ProductsSales> productsSalesStream = productSales.entrySet().stream().map(e -> new ProductsSales(e.getKey(), e.getValue(), e.getValue() * e.getKey().getPrice()));
 
+//        final Stream<ProductsSales> productsSalesStream1 =
+//                orders.flatMap(o -> o.getOrderLines())
+//                    .collect(groupingBy(Order.OrderLine::getProduct,
+//                            counting()
+//                    ))
+//                .entrySet().stream()
+//                    .map(e -> new ProductsSales(e.getKey(), e.getValue(), e.getValue() * e.getKey().getPrice()));
     }
 
 
@@ -107,31 +111,19 @@ public class Ficha2Tests {
 
 
     public void test2_7() throws Exception {
+        final Map<Customer, Double> customerSales = orders.collect(groupingBy(o -> o.getCustomer(), summingDouble(Order::getTotal)));
+
+        final Stream<Map.Entry<Customer, Double>> customerSalesSorted = customerSales.entrySet().stream().sorted(comparing(e -> e.getValue()));
+
+        final Stream<Customer> topCustomers = customerSalesSorted.limit(5).map(Map.Entry::getKey);
+
+
+//        final Stream<Customer> topCustomers = orders.collect(groupingBy(o -> o.getCustomer(), summingDouble(Order::getTotal))) // Map<Customer, Double>
+//                                                    .entrySet().stream()                                                       // Stream<Map.Entry<Customer, Double>>
+//                                                    .sorted(comparing(e -> e.getValue()))                                      // Stream<Map.Entry<Customer, Double>>
+//                                                    .limit(5)                                                                  // Stream<Map.Entry<Customer, Double>>
+//                                                    .map(Map.Entry::getKey);
+
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

@@ -17,12 +17,13 @@ public class FakeService {
         }
     }
 
-    public static void delay() {
+    public static void delayFixed(String name) {
         delay(1000L);
     }
 
-    public static void delayRandom() {
+    public static void delay(String name) {
         int delay = 500 + random.nextInt(2000); try {
+            System.out.println(name + " sleeping for " + delay);
             Thread.sleep(delay);
         } catch (InterruptedException e) {
             throw new RuntimeException(e); }
